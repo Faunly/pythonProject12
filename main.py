@@ -25,6 +25,29 @@ if responce.status_code == 200:
 
     print(f"По запросу: {query}")
     print(f"Найдено: {num_found} результат(ов)")
+    print()
 
     for i in range(num_found):
-        print(responce.json()['docs'][i])  # Title
+
+        # Title
+        try:
+            title_book = responce.json()['docs'][i]['title']
+            print(f"\tНазвание: {title_book}")
+        except KeyError:
+            print('\tНет названия')
+
+        # Author name
+        try:
+            author_name = responce.json()['docs'][i]['author_name']
+            print(f"\tАвтор: {author_name[0]}")
+        except KeyError:
+            print('\tНет автора')
+
+        # Publish_year
+        try:
+            publish_year = responce.json()['docs'][i]['publish_year']
+            print(f"\tДата публикаций: {publish_year[0]}")
+        except KeyError:
+            print('\tДата публицации неизвестна')
+
+        print()
